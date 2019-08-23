@@ -456,7 +456,7 @@ void MessageRoute::onProcessControlServiceMessage(std::shared_ptr<BaseMessage> &
         mExit = true;
         break;
     case Operate_Reload:
-        reloadService();
+        mReload = true;
         break;
     }
 }

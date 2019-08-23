@@ -7,17 +7,8 @@ import sys
 currentTime = time.localtime()
 strTime = "%d-%02d-%02d %02d:%02d:%02d" % (currentTime.tm_year, currentTime.tm_mon, currentTime.tm_mday, currentTime.tm_hour, currentTime.tm_min,currentTime.tm_sec)
 
-# 协议模块
-protocolModuleName = ["log", "CommonSocket", "HttpServer", "HttpApiServer","RtmpServer", "ProtocolTest"]
-
-# 基础模块
-baseModuleName = ["Common", "CoreModule", "DeviceManager", "NetworkManager", "ServiceStatusManager", "StorageManager", "ConfigureManager", "ExceptionManager", "RtmpServiceManager", "FFmpegIngestManager", "FFmpegTest", "PublishStatisticManager", "IngestStatisticManager"]
-
-# 业务模块
-businessModuleName = ["LiveStreamManager", "RecordStreamManager"]
-
-# 可执行文件名
-serviceName = "video"
+# 服务名称
+serviceName = "cfg"
 
 # git信息
 gitBranch = "unknown"
@@ -78,44 +69,31 @@ def getGitInfo():
 
 #编译各个模块
 def compileModules():
-    global protocolModuleName, baseModuleName, businessModuleName, serviceName
+    global serviceName
 
     compileSuccessful = True
 
     # 创建软连接
-    libraryPath = ["../thirdparty/lib/linux64/WeiYuan", "../thirdparty/lib/linux64/openCV", "../thirdparty/lib/linux64/Qt"]
+    libraryPath = ["../thirdparty/lib/linux64/Qt"]
     for library in libraryPath:
         createSymbolLink(library)
 
     try:
-        # 协议模块的路径
-        protocolModuleDir = "../src/module/protocol"
-        for module in protocolModuleName:
-            modulePath = os.path.join(protocolModuleDir, module)
+        projectFile = "../src/" + serviceName + ".pro"
+        if not os.path.exists(projectFile):
+            raise Exception("not find project file %s"%projectFile)
 
-            if not compileOneModule(modulePath, module):
-                raise Exception("compile protocol module fail")
+        with open(projectFile, "r") as file:
+            for lineData in file:
+                if lineData.find("./") <= 0:
+                    continue
 
-        # 基础模块的路径
-        baseModuleDir = "../src/module/base"
-        for module in baseModuleName:
-            modulePath = os.path.join(baseModuleDir, module)
+                lineData = lineData.replace("\\", "")
+                lineData = lineData.strip()
+                (path, file) = os.path.split(lineData)
+                if not compileOneModule(path, file):
+                    raise Exception("compile protocol module fail")
 
-            if not compileOneModule(modulePath, module):
-                raise Exception("compile base module fail")
-
-        # 业务模块的路径
-        buisinessModuleDir = "../src/module/business"
-        for module in businessModuleName:
-            modulePath = os.path.join(buisinessModuleDir, module)
-
-            if not compileOneModule(modulePath, module):
-                raise Exception("compile buisiness fail")
-
-        # 编译服务
-        serviceModuleDir = "../src/service/" + serviceName
-        if not compileOneModule(serviceModuleDir, serviceName):
-            raise Exception("compile service fail")
     except:
         compileSuccessful = False
     finally:

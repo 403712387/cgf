@@ -1,12 +1,11 @@
 QT       += core
 QT       -= gui
 CONFIG += c++11
-TARGET = NetworkManager
+TARGET = HttpManager
 TEMPLATE = lib
 DESTDIR = ../../../bin/cgf/lib/module
-DEFINES += PROTOBUF_USE_DLLS
-OBJECTS_DIR = ../../../output/NetworkManager
-MOC_DIR = ../../../output/NetworkManager
+OBJECTS_DIR = ../../../output/HttpManager
+MOC_DIR = ../../../output/HttpManager
 
 INCLUDEPATH += ../Common/src \
             ../../../../thirdparty/include \
@@ -19,14 +18,14 @@ INCLUDEPATH += ../Common/src \
             ../CoreModule/src
 
 win32 {
-LIBS += -L../../../bin/video/lib/module -lCommon -lCoreModule -lCommon \
+LIBS += -L../../../bin/cgf/lib/module -lCommon -lCoreModule -lCommon \
         -L../../../../thirdparty/lib/windows64/Qt -lQt5Core \
         -L../../../../thirdparty/lib/windows64/libmicrohttpd -llibmicrohttpd-dll \
         -L../../../../thirdparty/lib/windows64/jsoncpp -ljsoncpp
 }
 
 unix {
-LIBS += -L../../../bin/video/lib/module -lCommon -lCoreModule -lCommon \
+LIBS += -L../../../bin/cgf/lib/module -lCommon -lCoreModule -lCommon \
         -L../../../../thirdparty/lib/linux64/Qt -lQt5Core \
         -L../../../../thirdparty/lib/linux64/libmicrohttpd  -lmicrohttpd \
         -L../../../../thirdparty/lib/linux64/jsoncpp  -ljsoncpp

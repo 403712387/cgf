@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 #include <sstream>
 #include "ServiceStatusInfo.h"
-#include "ServiceStatusMessage.h"
+#include "GetServiceStatusMessage.h"
 #include "ServiceStatusManager.h"
 #include "curl/curl.h"
 #include "jsoncpp/json.h"
@@ -20,6 +20,9 @@ ServiceStatusManager::ServiceStatusManager(MessageRoute *messageRoute)
 
     // 获取第三方库信息
     initLibraryVersionInfo();
+
+    // 订阅消息
+    subscribeMessage(Service_Status_Message);
 }
 
 // 初始化服务的状态信息
@@ -73,15 +76,21 @@ void ServiceStatusManager::beginWork()
 // 卸载模块
 void ServiceStatusManager::uninit()
 {
-    LOG_I(mClassName, "begin uninit ");
+    LOG_I(mClassName, "begin uninit");
     BaseProcess::uninit();
-    LOG_I(mClassName, "end uninit module ");
+    LOG_I(mClassName, "end uninit");
 }
 
 // 处理消息的函数
 std::shared_ptr<BaseResponse> ServiceStatusManager::onProcessMessage(std::shared_ptr<BaseMessage> &message)
 {
     std::shared_ptr<BaseResponse> response;
+    switch(message->getMessageType())
+    {
+    case Service_Status_Message:    // 获取服务状态信息
+        response = onProcessGetServiceStatusMessage(message);
+    }
+
     return response;
 }
 
@@ -92,6 +101,13 @@ bool ServiceStatusManager::onForeseeMessage(std::shared_ptr<BaseMessage> &messag
 }
 
 // 处理消息的回应
-void ServiceStatusManager::onProcessMessageResponse(std::shared_ptr<BaseResponse> &response)
+void ServiceStatusManager::onProcessResponse(std::shared_ptr<BaseResponse> &response)
 {
+}
+
+// 处理获取服务状态消息
+std::shared_ptr<BaseResponse> ServiceStatusManager::onProcessGetServiceStatusMessage(std::shared_ptr<BaseMessage> &message)
+{
+    std::shared_ptr<GetServiceStatusResponse> response = std::make_shared<GetServiceStatusResponse>(mServiceStatusInfo, message, Common::noError());
+    return response;
 }

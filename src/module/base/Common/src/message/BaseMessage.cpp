@@ -24,59 +24,8 @@ std::string BaseClass::getMessageTypeName(MessageType type)
     case Config_Message:    // 配置信息
         result = "config message";
         break;
-    case Storage_Message:   // 存储消息
-        result = "storage";
-        break;
     case Service_Status_Message: // 运行时信息
         result = "service status";
-        break;
-    case Get_Storage_Config_Message:    // 查询存储配置
-        result = "get storage configure";
-        break;
-    case Set_Storage_Config_Message:    // 设置存储配置
-        result = "set storage configure";
-        break;
-    case Login_Service_Message:     // 登陆服务组件
-        result = "login service";
-        break;
-    case Send_Network_Message:      // 发送网络消息
-        result = "send network";
-        break;
-    case Publish_Device_Message:    // 查询设备信息
-        result = "publish device";
-        break;
-    case Remove_Device_Message:     // 删除设备信息
-        result = "remove device";
-        break;
-    case Query_Device_Message:      // 查询设备信息
-        result = "query device";
-        break;
-    case Play_Live_Message:         // 播放实时流
-        result = "play live";
-        break;
-    case Play_Record_Message:       // 播放历史流
-        result = "play record";
-        break;
-    case Stop_Play_Message:      // 停止播放流
-        result = "stop play";
-        break;
-    case FFmpeg_Ingest_Message:     // ffmpeg拉取流
-        result = "ffmpeg ingest";
-        break;
-    case Stop_Ingest_Message:       // 停止拉流
-        result = "stop ingest";
-        break;
-    case Ingest_Exception_Message:  // 拉流异常
-        result = "ingest exception";
-        break;
-    case Video_Frame_Message:   // 视频帧
-        result = "video frame";
-        break;
-    case Ingest_Statistic_Message:  // 拉流统计
-        result = "ingest statistic";
-        break;
-    case Publish_Statistic_Message: // 发布流统计
-        result = "publish statistic";
         break;
     }
     return result;
@@ -94,77 +43,9 @@ MessageType BaseClass::getMessageTypeByName(std::string name)
     {
         result = Config_Message;
     }
-    else if ("storage"  == name)
-    {
-        result = Storage_Message;
-    }
     else if ("service status"  == name)
     {
         result = Service_Status_Message;
-    }
-    else if ("get storage configure" == name)
-    {
-        result = Get_Storage_Config_Message;
-    }
-    else if ("set storage configure" == name)
-    {
-        result = Set_Storage_Config_Message;
-    }
-    else if ("login service" == name)
-    {
-        result = Login_Service_Message;
-    }
-    else if ("send network" == name)
-    {
-        result = Send_Network_Message;
-    } 
-    else if ("publish device" == name)
-    {
-        result = Publish_Device_Message;
-    }
-    else if ("remove device" == name)
-    {
-        result = Remove_Device_Message;
-    }
-    else if ("query device" == name)
-    {
-        result = Query_Device_Message;
-    }
-    else if ("play live" == name)
-    {
-        result = Play_Live_Message;
-    }
-    else if ("play record" == name)
-    {
-        result = Play_Record_Message;
-    }
-    else if ("stop play" == name)
-    {
-        result = Stop_Play_Message;
-    }
-    else if ("ffmpeg ingest" == name)
-    {
-        result = FFmpeg_Ingest_Message;
-    }
-    else if ("stop ingest" == name)
-    {
-        result = Stop_Ingest_Message;
-    }
-    else if ("ingest exception" == name)
-    {
-        result = Ingest_Exception_Message;
-    }
-    else if ("video frame" == name)
-    {
-        result = Video_Frame_Message;
-    }
-    else if ("ingest statistic" == name)
-    {
-        result = Ingest_Statistic_Message;
-    }
-    else if ("publish statistic" == name)
-    {
-        result = Publish_Statistic_Message;
     }
     return result;
 }

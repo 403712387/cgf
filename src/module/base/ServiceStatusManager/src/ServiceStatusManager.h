@@ -28,8 +28,11 @@ protected:
     virtual bool onForeseeMessage(std::shared_ptr<BaseMessage> &message);
 
     // 处理消息的回应
-    virtual void onProcessMessageResponse(std::shared_ptr<BaseResponse> &response);
+    virtual void onProcessResponse(std::shared_ptr<BaseResponse> &response);
 
+private:
+    // 处理获取服务状态消息
+    std::shared_ptr<BaseResponse> onProcessGetServiceStatusMessage(std::shared_ptr<BaseMessage> &message);
 private:
 
     // 初始化服务的状态信息

@@ -29,13 +29,13 @@ bool ConfigureJson::loadConfigure()
         return false;
     }
 
-    std::string videoService = "service";
-    if (readerRoot.isMember(videoService))
+    std::string cgfService = "cgf_service";
+    if (readerRoot.isMember(cgfService))
     {
         // http port
-        if (readerRoot[videoService].isMember("http_port"))
+        if (readerRoot[cgfService].isMember("http_port"))
         {
-            mHttpPort = readerRoot[videoService]["http_port"].asInt();
+            mHttpPort = readerRoot[cgfService]["http_port"].asInt();
         }
     }
 
@@ -46,6 +46,34 @@ bool ConfigureJson::loadConfigure()
 int ConfigureJson::getHttpPort(int defaultPort)
 {
     return (mHttpPort > 0) ? mHttpPort : defaultPort;
+}
+
+// 设置http接口
+void ConfigureJson::setHttpPort(int port)
+{
+    if (mHttpPort == port)
+    {
+        return;
+    }
+
+    mHttpPort = port;
+
+    // 保存到配置文件
+    saveConfigure();
+}
+
+// 保存到配置文件
+bool ConfigureJson::saveConfigure()
+{
+    Json::Value jsonValue;
+    std::string cgfService = "cgf_service";
+
+    // http端口
+    jsonValue[cgfService]["http_port"] = mHttpPort;
+
+    // 保存成文件
+    std::string configureData = jsonValue.toStyledString();
+    return Common::writeFile(mConfigureFile, configureData);
 }
 
 std::string ConfigureJson::toString()

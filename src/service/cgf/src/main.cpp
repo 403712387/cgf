@@ -3,8 +3,9 @@
 #include "Common.h"
 #include "MessageRoute.h"
 #include "BaseProcess.h"
-#include "NetworkManager.h"
+#include "HttpManager.h"
 #include "ConfigureManager.h"
+#include "ServiceStatusManager.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,12 +21,17 @@ int main(int argc, char *argv[])
             common_log::Log_Level logLevel = Common::getLogLevelFromString(argv[i + 1]);
             common_log::setLogLevel(logLevel);
         }
+        if (param == "-h" )  // 帮助
+        {
+            LOG_I("main", "./cgf -l verbose|debug|info|warn|error|fatal")
+        }
     }
 
     // 启动各个模块
     MessageRoute messageRoute;
     ConfigureManager configureManager(&messageRoute);
-    NetworkManager networkManager(&messageRoute);
+    HttpManager httpManager(&messageRoute);
+    ServiceStatusManager serviceStatusManager(&messageRoute);
     messageRoute.beginWork();
 
     LOG_I("main", "********************Bye********************");

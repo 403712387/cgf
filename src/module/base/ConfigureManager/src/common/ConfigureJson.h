@@ -13,11 +13,17 @@ public:
     // 获取http接口
     int getHttpPort(int defaultPort = 1224);
 
+    // 设置http接口
+    void setHttpPort(int port);
+
     std::string toString();
 
 private:
     // 从配置文件中加载配置信息
     bool loadConfigure();
+
+    // 保存到配置文件
+    bool saveConfigure();
 
 private:
     std::string     mClassName = "ConfigureJson";

@@ -9,6 +9,9 @@ ConfigureManager::ConfigureManager(MessageRoute *messageRoute, std::string confi
 {
     mConfigFile = configFile;
     mConfigureInfo = std::make_shared<ConfigureInfo>();
+
+    // 订阅消息
+    subscribeMessage(Config_Message);
 }
 
 bool ConfigureManager::init()
@@ -44,13 +47,14 @@ void ConfigureManager::uninit()
 // 处理消息的函数
 std::shared_ptr<BaseResponse> ConfigureManager::onProcessMessage(std::shared_ptr<BaseMessage> &message)
 {
-    std::shared_ptr<BaseResponse> result;
-    switch (message->getMessageType())
+    std::shared_ptr<BaseResponse> response;
+    switch(message->getMessageType())
     {
-    default:
-        break;
+    case Config_Message:        // 配置信息
+        response = onProcessConfigMessage(message);
     }
-    return result;
+
+    return response;
 }
 
 // 处理消息的回应
@@ -86,3 +90,15 @@ void ConfigureManager::sendConfigureMessage()
     sendMessage(message);
 }
 
+// 处理配置消息
+std::shared_ptr<BaseResponse> ConfigureManager::onProcessConfigMessage(std::shared_ptr<BaseMessage> message)
+{
+    std::shared_ptr<BaseResponse> response;
+    std::shared_ptr<ConfigureInfoMessage> configureMessage = std::dynamic_pointer_cast<ConfigureInfoMessage>(message);
+    mConfigureInfo = configureMessage->getConfigureInfo();
+
+    // 更新配置文件
+    mConfigureFile->setHttpPort(mConfigureInfo->getHttpPort());
+
+    return response;
+}

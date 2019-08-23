@@ -8,7 +8,6 @@ DESTDIR = ../../../bin/cgf/lib/module
 OBJECTS_DIR = ../../../output/Common
 MOC_DIR = ../../../output/Common
 
-
 INCLUDEPATH += ../../../../thirdparty/include \
             ../../../../thirdparty/include/Qt/QtCore \
             ../../protocol/log/src \

@@ -27,6 +27,9 @@ protected:
     virtual void onProcessResponse(std::shared_ptr<BaseResponse> &response);
 
 private:
+    // 处理配置消息
+    std::shared_ptr<BaseResponse> onProcessConfigMessage(std::shared_ptr<BaseMessage> message);
+private:
 
     // 设置配置信息
     void setConfigureInfo();

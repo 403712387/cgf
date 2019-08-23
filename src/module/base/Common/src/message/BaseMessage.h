@@ -31,26 +31,9 @@ enum MessageTransType
 enum MessageType
 {
     Base_Mesage = 0,
-    Service_Control_Message = 1,   // 控制服务的消息
-    Config_Message = 2,         // 配置消息
-    Storage_Message = 3,        // 保存文件的消息
-    Service_Status_Message = 4, // 运行状态信息
-    Get_Storage_Config_Message = 5,    // 获取存储配置
-    Set_Storage_Config_Message = 6,    // 设置存储配置
-    Login_Service_Message = 7,         // 登陆服务组件
-    Send_Network_Message = 8,          // 发送网络消息
-    Publish_Device_Message = 9,         // 发布设备信息
-    Remove_Device_Message = 10,         // 删除设备
-    Query_Device_Message = 11,          // 查询设备信息
-    Play_Live_Message = 12,             // 播放实时流
-    Play_Record_Message = 13,           // 播放历史流
-    Stop_Play_Message = 14,             // 停止播放流
-    FFmpeg_Ingest_Message = 15,         // ffmpeg拉取流
-    Stop_Ingest_Message = 16,           // 停止拉流
-    Ingest_Exception_Message = 17,      // 拉流异常
-    Video_Frame_Message = 18,           // 视频帧
-    Ingest_Statistic_Message = 19,      // 拉流统计
-    Publish_Statistic_Message = 20,     // 发布流统计
+    Service_Control_Message ,   // 控制服务的消息
+    Config_Message ,         // 配置消息
+    Service_Status_Message , // 运行状态信息
 };
 
 // 优先级的类型

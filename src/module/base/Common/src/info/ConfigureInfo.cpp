@@ -5,6 +5,7 @@
 void ConfigureInfo::setLogLevel(common_log::Log_Level level)
 {
     mLogLevel = level;
+    common_log::setLogConfigFile(mLogLevel);
 }
 
 std::string ConfigureInfo::getLogLevel()
@@ -16,6 +17,7 @@ std::string ConfigureInfo::getLogLevel()
 void ConfigureInfo::setLogKeyword(std::string keyword)
 {
     mLogKeyword = keyword;
+    common_log::setFilterWord(mLogKeyword);
 }
 
 std::string ConfigureInfo::getLogKeyword()

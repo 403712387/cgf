@@ -53,6 +53,9 @@ private:
     // 获取配置信息
     std::string onGetConfigureInfo(std::string &body);
 
+    // 设置配置信息
+    std::string onSetConfigureInfo(std::string &body);
+
     // 获取服务状态
     std::string onGetServiceStatus(std::string &body);
 
