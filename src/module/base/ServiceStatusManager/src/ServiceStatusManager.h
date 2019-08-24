@@ -1,7 +1,5 @@
 ﻿#ifndef SERVICE_STATUS_MANAGER_H
 #define SERVICE_STATUS_MANAGER_H
-#include <QtCore/QMap>
-#include <QtCore/QSet>
 #include <atomic>
 #include "BaseProcess.h"
 
