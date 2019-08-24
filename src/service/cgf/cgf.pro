@@ -30,7 +30,8 @@ LIBS += -L../../bin/cgf/lib/module -lCommon -lCoreModule -lHttpManager -lService
         -L../../../thirdparty/lib/linux64/jsoncpp  -ljsoncpp \
         -L../../../thirdparty/lib/linux64/log4cplus -llog4cplus \
         -L../../../thirdparty/lib/linux64/curl -lcurl \
-        -L../../../thirdparty/lib/linux64/Qt -lQt5Core \
+        -L../../../thirdparty/lib/linux64/libmicrohttpd  -lmicrohttpd \
+        -L../../../thirdparty/lib/linux64/Qt -lQt5Core -licudata.so -licui18n -licuuc \
         -luuid
 }
 
