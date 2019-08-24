@@ -8,7 +8,7 @@ currentTime = time.localtime()
 strTime = "%d-%02d-%02d %02d:%02d:%02d" % (currentTime.tm_year, currentTime.tm_mon, currentTime.tm_mday, currentTime.tm_hour, currentTime.tm_min,currentTime.tm_sec)
 
 # 服务名称
-serviceName = "cfg"
+serviceName = "cgf"
 
 # git信息
 gitBranch = "unknown"
