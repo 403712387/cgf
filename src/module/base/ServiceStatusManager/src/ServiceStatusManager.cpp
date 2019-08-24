@@ -46,13 +46,13 @@ void ServiceStatusManager::initLibraryVersionInfo()
     std::string jsoncppVersion = JSONCPP_VERSION_STRING;
     std::string libmicrohttpdVersion = MHD_get_version();
     std::string log4cplusVersion = LOG4CPLUS_VERSION_STR;
-    //std::string qtVersion = qVersion();
+    std::string qtVersion = qVersion();
 
     mServiceStatusInfo->setLibraryVersion("curl", curlVersion);
     mServiceStatusInfo->setLibraryVersion("jsoncpp", jsoncppVersion);
     mServiceStatusInfo->setLibraryVersion("libmicrohttpd", libmicrohttpdVersion);
     mServiceStatusInfo->setLibraryVersion("log4cplus", log4cplusVersion);
-    //mServiceStatusInfo->setLibraryVersion("Qt", qtVersion);
+    mServiceStatusInfo->setLibraryVersion("Qt", qtVersion);
 }
 
 bool ServiceStatusManager::init()

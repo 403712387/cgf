@@ -6,6 +6,7 @@ TEMPLATE = app
 DESTDIR = ../../bin/cgf
 OBJECTS_DIR = ../../output/cgf
 MOC_DIR = ../../output/cgf
+DEFINES += QT_NO_VERSION_TAGGING
 
 INCLUDEPATH += \
             ../../module/base/Common/src \
