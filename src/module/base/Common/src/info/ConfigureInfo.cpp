@@ -5,7 +5,7 @@
 void ConfigureInfo::setLogLevel(common_log::Log_Level level)
 {
     mLogLevel = level;
-    common_log::setLogConfigFile(mLogLevel);
+    common_log::setLogLevel(mLogLevel);
 }
 
 std::string ConfigureInfo::getLogLevel()
