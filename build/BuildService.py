@@ -74,7 +74,7 @@ def compileModules():
     compileSuccessful = True
 
     # 创建软连接
-    libraryPath = ["../thirdparty/lib/linux64/Qt"]
+    libraryPath = ["../thirdparty/lib/linux64/Qt", "../thirdparty/lib/linux64/gperftools"]
     for library in libraryPath:
         createSymbolLink(library)
 
