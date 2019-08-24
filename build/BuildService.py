@@ -94,7 +94,6 @@ def compileModules():
                 (path, file) = os.path.split(lineData)
                 path = path.replace("./", "../src/")
                 if not compileOneModule(path, file):
-                    print("compile %s %s fail" % (path,projectFile))
                     raise Exception("compile  module fail")
 
     except:
@@ -117,7 +116,7 @@ def compileOneModule(modulePath, module):
         print("compile module fail, not find module directory, module path:%s, module name:%s"%(modulePath, module))
         return False
 
-    moduleProFile = os.path.join(modulePath, module + ".pro")
+    moduleProFile = os.path.join(modulePath, module)
     if not os.path.exists(moduleProFile):
         print("compile module fail, not find pro file, module path:%s, module name:%s"%(modulePath, module))
         return False
