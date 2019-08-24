@@ -4,7 +4,7 @@
 #include <memory>
 #include <mutex>
 #include <chrono>
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <condition_variable>
 #include "Base.h"
 
