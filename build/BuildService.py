@@ -91,6 +91,7 @@ def compileModules():
                 lineData = lineData.replace("\\", "")
                 lineData = lineData.strip()
                 (path, file) = os.path.split(lineData)
+                path = path.replace("./", "../src/")
                 if not compileOneModule(path, file):
                     raise Exception("compile protocol module fail")
 
