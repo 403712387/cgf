@@ -9,7 +9,7 @@ MOC_DIR = ../../../output/HttpManager
 
 INCLUDEPATH += ../Common/src \
             ../../../../thirdparty/include \
-            ../../../../thirdparty/include/Qt/QtCore \
+            ../../../../thirdparty/include/Qt \
             ../Common/src/message \
             ../Common/src/info \
             ../Common/src/common \

@@ -1,5 +1,5 @@
 #include <malloc.h>
-#include <QDateTime>
+#include <QtCore/QDateTime>
 #include "Log.h"
 #include "JsonHelper.h"
 #include "BaseMessage.h"

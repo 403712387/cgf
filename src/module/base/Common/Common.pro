@@ -9,7 +9,7 @@ OBJECTS_DIR = ../../../output/Common
 MOC_DIR = ../../../output/Common
 
 INCLUDEPATH += ../../../../thirdparty/include \
-            ../../../../thirdparty/include/Qt/QtCore \
+            ../../../../thirdparty/include/Qt \
             ../../protocol/log/src \
             src \
             src/common \

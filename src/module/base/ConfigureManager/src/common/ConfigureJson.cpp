@@ -1,5 +1,5 @@
-#include <QFile>
-#include <QString>
+#include <QtCore/QFile>
+#include <QtCore/QString>
 #include <sstream>
 #include "ConfigureInfo.h"
 #include "ConfigureJson.h"

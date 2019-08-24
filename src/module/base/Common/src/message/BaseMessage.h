@@ -2,7 +2,7 @@
 #define PANDA_MESSAGE_H
 #include <string>
 #include <memory>
-#include <QDateTime>
+#include <QtCore/QDateTime>
 #include "Error.h"
 #include "Base.h"
 

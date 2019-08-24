@@ -1,6 +1,6 @@
 ﻿#ifndef CONFIGURE_MANAGER_H
 #define CONFIGURE_MANAGER_H
-#include <QMap>
+#include <QtCore/QMap>
 #include <atomic>
 #include "BaseProcess.h"
 

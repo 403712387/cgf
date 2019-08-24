@@ -1,5 +1,5 @@
-#include <QtGlobal>
-#include <QCoreApplication>
+#include <QtCore/QtGlobal>
+#include <QtCore/QCoreApplication>
 #include "Common.h"
 #include "MessageRoute.h"
 #include "BaseProcess.h"

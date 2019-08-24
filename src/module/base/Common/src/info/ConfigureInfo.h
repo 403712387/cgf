@@ -1,6 +1,6 @@
 #ifndef CONFIGURE_INFO_H
 #define CONFIGURE_INFO_H
-#include <QMap>
+#include <QtCore/QMap>
 #include <mutex>
 #include "Common.h"
 #include "jsoncpp/json.h"

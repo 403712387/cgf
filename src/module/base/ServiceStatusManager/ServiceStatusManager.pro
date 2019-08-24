@@ -11,7 +11,7 @@ INCLUDEPATH += ../Common/src \
             ../Common/src/info \
             ./src/common \
             ../../../../thirdparty/include \
-            ../../../../thirdparty/include/Qt/QtCore \
+            ../../../../thirdparty/include/Qt \
             ../Common/src/message \
             ../CoreModule/src
 win32 {

@@ -1,8 +1,8 @@
 #ifndef SERVICE_STATUS_INFO_H
 #define SERVICE_STATUS_INFO_H
-#include <QMap>
+#include <QtCore/QMap>
 #include <mutex>
-#include <QDateTime>
+#include <QtCore/QDateTime>
 #include "Common.h"
 #include "jsoncpp/json.h"
 

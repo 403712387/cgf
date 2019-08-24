@@ -1,8 +1,8 @@
-#include <QDir>
+#include <QtCore/QDir>
 #include <vector>
 #include <atomic>
-#include <QDateTime>
-#include <QFileInfoList>
+#include <QtCore/QDateTime>
+#include <QtCore/QFileInfoList>
 #include "Common.h"
 
 #ifndef WIN32

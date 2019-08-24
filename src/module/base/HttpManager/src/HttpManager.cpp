@@ -1,5 +1,5 @@
-#include <QString>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QByteArray>
 #include <sstream>
 #include "Log.h"
 #include "HttpHelper.h"

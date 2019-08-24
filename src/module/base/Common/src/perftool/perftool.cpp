@@ -1,5 +1,5 @@
-#include <QtGlobal>
-#include <QByteArray>
+#include <QtCore/QtGlobal>
+#include <QtCore/QByteArray>
 #include "Log.h"
 #include "perftool.h"
 #include "Common.h"

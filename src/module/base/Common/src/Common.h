@@ -2,8 +2,8 @@
 #define COMMON_COMMON_H
 #include <vector>
 #include <string>
-#include <QRect>
-#include <QDateTime>
+#include <QtCore/QRect>
+#include <QtCore/QDateTime>
 #include "Log.h"
 #include "message/BaseMessage.h"
 

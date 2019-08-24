@@ -4,7 +4,6 @@
 #include <mutex>
 #include <memory>
 #include <condition_variable>
-#include <QObject>
 #include "Base.h"
 
 class CGF_EXPORT HttpHelper
