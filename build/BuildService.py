@@ -81,6 +81,7 @@ def compileModules():
     try:
         projectFile = "../src/" + serviceName + ".pro"
         if not os.path.exists(projectFile):
+            print("not find project file %s"%projectFile)
             raise Exception("not find project file %s"%projectFile)
 
         with open(projectFile, "r") as file:
@@ -93,7 +94,8 @@ def compileModules():
                 (path, file) = os.path.split(lineData)
                 path = path.replace("./", "../src/")
                 if not compileOneModule(path, file):
-                    raise Exception("compile protocol module fail")
+                    print("compile %s %s fail" % (path,projectFile))
+                    raise Exception("compile  module fail")
 
     except:
         compileSuccessful = False
