@@ -18,7 +18,7 @@ bool ConfigureManager::init()
 {
     LOG_I(mClassName, "begin init");
     mConfigureFile = std::make_shared<ConfigureJson>(mConfigFile);
-    LOG_I(mClassName, "configure info:" << mConfigureFile->toString());
+    LOG_I(mClassName, "configure file:" << mConfigFile << "configure info:" << mConfigureFile->toString());
 
     //  设置配置信息
     setConfigureInfo();
@@ -86,7 +86,7 @@ void ConfigureManager::sendConfigureMessage()
         return;
     }
 
-    std::shared_ptr<ConfigureInfoMessage> message = std::make_shared<ConfigureInfoMessage>(mConfigureInfo);
+    std::shared_ptr<ConfigureInfoMessage> message = std::make_shared<ConfigureInfoMessage>(mConfigureInfo, Sync_Trans_Message);
     sendMessage(message);
 }
 
