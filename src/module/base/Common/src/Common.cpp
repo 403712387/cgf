@@ -230,7 +230,7 @@ std::string Common::getReadableCapacitySize(long long bytes)
 // 获取http body tpye的字符串
 std::string Common::getHttpTypeName(HttpBodyType type)
 {
-    static std::vector<std::string> result = {"text/json", "image/jpeg", "text/html"};
+    static std::vector<std::string> result = {"text/json", "image/jpeg", "text/html", "application/octet-stream"};
     if (type < 0 || type >= result.size())
     {
         return result[0];

@@ -25,6 +25,7 @@ win32 {
 LIBS += -L../../../../thirdparty/lib/windows64/curl -llibcurl \
         -L../../../../thirdparty/lib/windows64/Qt -lQt5Core \
         -L../../../../thirdparty/lib/windows64/log4cplus -llog4cplusU \
+        -L../../../../thirdparty/lib/windows64/gperftools -laddressmap_unittest -llibtcmalloc_minimal -llow_level_alloc_unittest \
         -L../../../../thirdparty/lib/windows64/jsoncpp -ljsoncpp
 }
 

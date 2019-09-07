@@ -65,6 +65,21 @@ private:
     // index页面
     std::string onProcessIndex(std::string &body);
 
+    // 开始cpu性能分析
+    std::string onStartCpuProfile(std::string &body);
+
+    // 停止cpu性能分析
+    std::string onStopCpuProfile(std::string &body);
+
+    // 开始内存性能分析
+    std::string onStartHeapProfile(std::string &body);
+
+    // 停止内存性能分析
+    std::string onStopHeapProfile(std::string &body);
+
+    // 下载文件
+    std::string onDownloadFile(std::string url);
+
     // 获取http的body
     bool getHttpBody(void *cls, MHD_Connection *connection, const char *url,const char *method, const char *version,
                      const char *upload_data, size_t *upload_data_size, void **ptr, std::string &body);

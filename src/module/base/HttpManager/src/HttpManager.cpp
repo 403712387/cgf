@@ -1,7 +1,9 @@
+#include <QtCore/QFileInfo>
 #include <QtCore/QString>
 #include <QtCore/QByteArray>
 #include <sstream>
 #include "Log.h"
+#include "Common.h"
 #include "HttpHelper.h"
 #include "JsonHelper.h"
 #include "HttpManager.h"
@@ -11,6 +13,7 @@
 #include "GetServiceStatusMessage.h"
 #include "ConfigureInfoMessage.h"
 #include "jsoncpp/json.h"
+#include "perftool/perftool.h"
 
 struct TPostStatus
 {
@@ -178,7 +181,28 @@ int HttpManager::onProcess(void *cls, MHD_Connection *connection, const char *ur
     }
     else if (requestUrl.compare("/control/service", Qt::CaseInsensitive) == 0)  // 服务控制
     {
-        response =onControlService(body);
+        response = onControlService(body);
+    }
+    else if (requestUrl.compare("/cpu/profile/start", Qt::CaseInsensitive) == 0)  // 开始性能分析
+    {
+        response = onStartCpuProfile(body);
+    }
+    else if (requestUrl.compare("/cpu/profile/stop", Qt::CaseInsensitive) == 0)  //  停止性能分析
+    {
+        response = onStopCpuProfile(body);
+    }
+    else if (requestUrl.compare("/heap/profile/start", Qt::CaseInsensitive) == 0)  // 开始内存分析
+    {
+        response = onStartCpuProfile(body);
+    }
+    else if (requestUrl.compare("/heap/profile/stop", Qt::CaseInsensitive) == 0)  //  停止内存分析
+    {
+        response = onStopCpuProfile(body);
+    }
+    else if (requestUrl.startsWith("/download/", Qt::CaseInsensitive))  //  下载文件
+    {
+        response = onDownloadFile(requestUrl.toStdString());
+        httpBodyType = Http_Body_File;
     }
     else
     {
@@ -273,6 +297,12 @@ bool HttpManager::sendResponse(MHD_Connection *connection, std::string info, std
         LOG_E(mClassName, "put response fail when process request, url:" << url);
         return false;
     }
+    if (Http_Body_File == bodyType)
+    {
+        std::string fileName = QFileInfo(url.c_str()).baseName().toStdString();
+        std::string value = "attachment;filename=" + fileName;
+        MHD_add_response_header(response, "Content-Disposition", value.c_str());
+    }
 
     if (Http_Body_Image != bodyType)
     {
@@ -322,6 +352,59 @@ bool HttpManager::getHttpBody(void *cls, MHD_Connection *connection, const char 
         delete post;
     }
     return true;
+}
+// 开始cpu性能分析
+std::string HttpManager::onStartCpuProfile(std::string &body)
+{
+    std::string path = PerfTool::startCPUProfiler();
+    path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
+    return getResponseBody(200, path);
+}
+
+// 停止cpu性能分析
+std::string HttpManager::onStopCpuProfile(std::string &body)
+{
+    std::string path = PerfTool::startCPUProfiler();
+    if (path.empty())
+    {
+        return getResponseBody(400, "cpu profile not start");
+    }
+
+    path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
+    return getResponseBody(200, path);
+}
+
+// 开始内存性能分析
+std::string HttpManager::onStartHeapProfile(std::string &body)
+{
+    std::string path = PerfTool::startHeapProfiler();
+    path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
+    return getResponseBody(200, path);
+}
+
+// 停止内存性能分析
+std::string HttpManager::onStopHeapProfile(std::string &body)
+{
+    std::string path = PerfTool::startHeapProfiler();
+    if (path.empty())
+    {
+        return getResponseBody(400, "heap profile not start");
+    }
+
+    path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
+    return getResponseBody(200, path);
+}
+
+// 下载文件
+std::string HttpManager::onDownloadFile(std::string url)
+{
+    url = QString::fromStdString(url).replace("/download/", "./html/").toStdString();
+    std::string data = Common::readFile(url);
+    if (data.empty())
+    {
+        data = getResponseBody(404, "not file " + url);
+    }
+    return data;
 }
 
 // 获取呼应的body

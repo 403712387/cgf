@@ -26,6 +26,7 @@ enum HttpBodyType
     Http_Body_Json = 0,         // json格式
     Http_Body_Image = 1,        // 图片格式
     Http_Body_Html = 2,         // html格式
+    Http_Body_File,             // 文件格式
 };
 
 namespace Common
