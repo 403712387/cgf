@@ -204,7 +204,7 @@ std::shared_ptr<BaseMessage> BaseResponse::getMessage()
 // 消息是否成功处理
 bool BaseResponse::isSuccessfulProcess()
 {
-    return NULL != mError.get();
+    return NULL == mError.get();
 }
 
 // 获取出错的原因

@@ -19,7 +19,8 @@ LIBS += -L../../../bin/cgf/lib/module -lCommon
 }
 
 unix {
-LIBS += -L../../../bin/cgf/lib/module -lCommon
+LIBS += -L../../../bin/cgf/lib/module -lCommon \
+        -L../../../../thirdparty/lib/linux64/gperftools/static -lprofiler -ltcmalloc
 }
 
 HEADERS += \

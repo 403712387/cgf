@@ -24,6 +24,7 @@ LIBS += -L../../../bin/cgf/lib/module -lCommon -lCoreModule \
 unix {
 LIBS += -L../../../bin/cgf/lib/module -lCommon -lCoreModule \
         -L../../../../thirdparty/lib/linux64/Qt -lQt5Core \
+        -L../../../../thirdparty/lib/linux64/gperftools/static -lprofiler -ltcmalloc \
         -L../../../../thirdparty/lib/linux64/jsoncpp -ljsoncpp
 }
 
