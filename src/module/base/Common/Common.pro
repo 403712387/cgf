@@ -7,7 +7,7 @@ TEMPLATE = lib
 DESTDIR = ../../../bin/cgf/lib/module
 OBJECTS_DIR = ../../../output/Common
 MOC_DIR = ../../../output/Common
-QMAKE_LFLAGS += -fPIC
+#QMAKE_LFLAGS += -fPIC
 
 INCLUDEPATH += ../../../../thirdparty/include \
             ../../../../thirdparty/include/Qt \
