@@ -6,6 +6,7 @@ TEMPLATE = lib
 DESTDIR = ../../../bin/cgf/lib/module
 OBJECTS_DIR = ../../../output/HttpManager
 MOC_DIR = ../../../output/HttpManager
+QMAKE_LFLAGS += -fPIC
 
 INCLUDEPATH += ../Common/src \
             ../../../../thirdparty/include \

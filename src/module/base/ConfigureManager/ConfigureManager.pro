@@ -6,6 +6,7 @@ TEMPLATE = lib
 DESTDIR = ../../../bin/cgf/lib/module
 OBJECTS_DIR = ../../../output/ConfigureManager
 MOC_DIR = ../../../output/ConfigureManager
+QMAKE_LFLAGS += -fPIC
 
 INCLUDEPATH += ../Common/src \
             ../Common/src/info \

@@ -7,6 +7,7 @@ DESTDIR = ../../..//bin/cgf/lib/module
 OBJECTS_DIR = ../../../output/CoreModule
 MOC_DIR = ../../../output/CoreModule
 DEFINES += QT_NO_VERSION_TAGGING
+QMAKE_LFLAGS += -fPIC
 
 INCLUDEPATH += ../Common/src \
             ../Common/src/info \
