@@ -7,7 +7,13 @@
 #include "HttpHelper.h"
 #include "JsonHelper.h"
 #include "HttpManager.h"
+#include "CPUStatistic.h"
+#include "DiskStatistic.h"
+#include "PlatformInfo.h"
+#include "SystemInfo.h"
 #include "ConfigureInfo.h"
+#include "ProcessStatistic.h"
+#include "MemoryStatistic.h"
 #include "ServiceStatusInfo.h"
 #include "ServiceControlMessage.h"
 #include "GetServiceStatusMessage.h"
@@ -199,6 +205,26 @@ int HttpManager::onProcess(void *cls, MHD_Connection *connection, const char *ur
     {
         response = onStopCpuProfile(body);
     }
+    else if (requestUrl.compare("/get/cpu/statstic", Qt::CaseInsensitive) == 0)  //  获取cpu信息
+    {
+        response = onGetCPUStatisticInfo();
+    }
+    else if (requestUrl.compare("/get/disk/statstic", Qt::CaseInsensitive) == 0)  //  获取磁盘信息
+    {
+        response = onGetDiskStatisticInfo();
+    }
+    else if (requestUrl.compare("/get/process/statistic", Qt::CaseInsensitive) == 0)  //  获取进程信息
+    {
+        response = onGetProcessStatisticInfo();
+    }
+    else if (requestUrl.compare("/get/memory/statistic", Qt::CaseInsensitive) == 0)  //  获取内存信息
+    {
+        response = onGetMemoryStatisticInfo();
+    }
+    else if (requestUrl.compare("/get/platform/info", Qt::CaseInsensitive) == 0)  //  获取平台信息
+    {
+        response = onGetPlatformInfo();
+    }
     else if (requestUrl.startsWith("/download/", Qt::CaseInsensitive))  //  下载文件
     {
         response = onDownloadFile(requestUrl.toStdString());
@@ -358,6 +384,7 @@ std::string HttpManager::onStartCpuProfile(std::string &body)
 {
     std::string path = PerfTool::startCPUProfiler();
     path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
+    LOG_I(mClassName, "begin cpu profile");
     return getResponseBody(200, path);
 }
 
@@ -370,6 +397,7 @@ std::string HttpManager::onStopCpuProfile(std::string &body)
         return getResponseBody(400, "cpu profile not start");
     }
 
+    LOG_I(mClassName, "end cpu profile");
     path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
     return getResponseBody(200, path);
 }
@@ -379,6 +407,7 @@ std::string HttpManager::onStartHeapProfile(std::string &body)
 {
     std::string path = PerfTool::startHeapProfiler();
     path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
+    LOG_I(mClassName, "begin heap profile");
     return getResponseBody(200, path);
 }
 
@@ -391,6 +420,7 @@ std::string HttpManager::onStopHeapProfile(std::string &body)
         return getResponseBody(400, "heap profile not start");
     }
 
+    LOG_I(mClassName, "end heap profile");
     path = QString::fromStdString(path).replace("./html/", "/download/").toStdString();
     return getResponseBody(200, path);
 }
@@ -405,6 +435,67 @@ std::string HttpManager::onDownloadFile(std::string url)
         data = getResponseBody(404, "not file " + url);
     }
     return data;
+}
+
+// 获取CPU使用情况
+std::string HttpManager::onGetCPUStatisticInfo()
+{
+    std::shared_ptr<CPUStatistic> result = SystemInfo::getCpuInfo();
+    if (NULL == result.get())
+    {
+        return getResponseBody(500, "get info fail");
+    }
+    return result->toJson().toStyledString();
+}
+
+// 获取进程统计信息
+std::string HttpManager::onGetProcessStatisticInfo()
+{
+    std::shared_ptr<ProcessStatistic> result = SystemInfo::getProcessInfo();
+    if (NULL == result.get())
+    {
+        return getResponseBody(500, "get info fail");
+    }
+    return result->toJson().toStyledString();
+}
+
+// 获取磁盘使用情况
+std::string HttpManager::onGetDiskStatisticInfo()
+{
+    std::vector<std::shared_ptr<DiskStatistic>> disks = SystemInfo::getDiskInfo();
+    if (disks.empty())
+    {
+         return getResponseBody(500, "get info fail");
+    }
+    Json::Value result;
+    for (int i = 0; i < disks.size(); ++i)
+    {
+        std::shared_ptr<DiskStatistic> disk = disks.at(i);
+        result["disk"][i] = disk->toJson();
+    }
+    return result.toStyledString();
+}
+
+// 获取内存使用情况
+std::string HttpManager::onGetMemoryStatisticInfo()
+{
+    std::shared_ptr<MemoryStatistic> result = SystemInfo::getMemoryInfo();
+    if (NULL == result.get())
+    {
+        return getResponseBody(500, "get info fail");
+    }
+    return result->toJson().toStyledString();
+}
+
+// 获取平台信息
+std::string HttpManager::onGetPlatformInfo()
+{
+    std::shared_ptr<PlatformInfo> result = SystemInfo::getPlatformInfo();
+    if (NULL == result.get())
+    {
+        return getResponseBody(500, "get info fail");
+    }
+    return result->toJson().toStyledString();
 }
 
 // 获取呼应的body

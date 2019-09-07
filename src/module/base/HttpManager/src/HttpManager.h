@@ -80,6 +80,21 @@ private:
     // 下载文件
     std::string onDownloadFile(std::string url);
 
+    // 获取CPU使用情况
+    std::string onGetCPUStatisticInfo();
+
+    // 获取进程统计信息
+    std::string onGetProcessStatisticInfo();
+
+    // 获取磁盘使用情况
+    std::string onGetDiskStatisticInfo();
+
+    // 获取内存使用情况
+    std::string onGetMemoryStatisticInfo();
+
+    // 获取平台信息
+    std::string onGetPlatformInfo();
+
     // 获取http的body
     bool getHttpBody(void *cls, MHD_Connection *connection, const char *url,const char *method, const char *version,
                      const char *upload_data, size_t *upload_data_size, void **ptr, std::string &body);

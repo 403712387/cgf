@@ -14,6 +14,7 @@ INCLUDEPATH += ../Common/src \
             ../Common/src/message \
             ../Common/src/info \
             ../Common/src/common \
+            ../Common/src/SystemInfo \
             ./src \
             ./src/helper \
             ../CoreModule/src

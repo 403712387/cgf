@@ -18,6 +18,7 @@ INCLUDEPATH += ../../../../thirdparty/include \
             src/log \
             src/perftool \
             src/thread \
+            src/SystemInfo \
             src/config/StorageConfig \
             src/message
 
@@ -44,7 +45,13 @@ HEADERS += \
     src/info/*.h \
     src/log/*.h \
     src/thread/*.h \
-    src/perftool/*.h
+    src/perftool/*.h \
+    src/SystemInfo/SystemInfo.h \
+    src/SystemInfo/CPUStatistic.h \
+    src/SystemInfo/ProcessStatistic.h \
+    src/SystemInfo/DiskStatistic.h \
+    src/SystemInfo/MemoryStatistic.h \
+    src/SystemInfo/PlatformInfo.h
 
 SOURCES += \
     src/*.cpp \
@@ -53,5 +60,11 @@ SOURCES += \
     src/info/*.cpp \
     src/log/*.cpp \
     src/thread/*.cpp \
-    src/perftool/*.cpp
+    src/perftool/*.cpp \
+    src/SystemInfo/SystemInfo.cpp \
+    src/SystemInfo/CPUStatistic.cpp \
+    src/SystemInfo/ProcessStatistic.cpp \
+    src/SystemInfo/DiskStatistic.cpp \
+    src/SystemInfo/MemoryStatistic.cpp \
+    src/SystemInfo/PlatformInfo.cpp
 

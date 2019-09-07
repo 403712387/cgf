@@ -1,4 +1,5 @@
 #include <QtCore/QtGlobal>
+#include <QtCore/QFileInfo>
 #include <QtCore/QByteArray>
 #include "Log.h"
 #include "perftool.h"
@@ -20,6 +21,10 @@ std::string PerfTool::startCPUProfiler()
     {
         return mCpuProfilerFile;
     }
+
+    // 创建目录
+    std::string path = QFileInfo(mCpuProfilerFile.c_str()).path().toStdString();
+    Common::createPath(path);
 
     mCpuProfiler = true;
     LOG_I(mClassName, "start cpu prifiler, file:" << mCpuProfilerFile);
@@ -48,6 +53,10 @@ std::string PerfTool::startHeapProfiler()
     {
         return mHeapProfilerFile;
     }
+
+    // 创建目录
+    std::string path = QFileInfo(mHeapProfilerFile.c_str()).path().toStdString();
+    Common::createPath(path);
 
     mHeapProfiler = true;
     LOG_I(mClassName, "start heap prifiler, file:" << mHeapProfilerFile);
