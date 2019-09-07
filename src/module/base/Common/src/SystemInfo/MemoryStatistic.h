@@ -23,14 +23,14 @@ private:
     // data of /proc/meminfo
 public:
     // MemActive = MemTotal - MemFree
-    uint64_t MemActive = 0;
+    long long MemActive = 0;
     // RealInUse = MemActive - Buffers - Cached
-    uint64_t RealInUse = 0;
+    long long RealInUse = 0;
     // NotInUse = MemTotal - RealInUse
     //          = MemTotal - MemActive + Buffers + Cached
     //          = MemTotal - MemTotal + MemFree + Buffers + Cached
     //          = MemFree + Buffers + Cached
-    uint64_t NotInUse = 0;
+    long long NotInUse = 0;
 
     unsigned long MemTotal = 0;
     unsigned long MemFree = 0;

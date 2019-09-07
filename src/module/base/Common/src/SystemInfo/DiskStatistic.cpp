@@ -10,16 +10,16 @@ Json::Value DiskStatistic::toJson()
     result["name"] = name;
     result["pgpgin"] = Json::Int64(pgpgin);
     result["pgpgout"] = Json::Int64(pgpgout);
-    result["rd_ios"] = rd_ios;
-    result["rd_merges"] = rd_merges;
-    result["rd_sectors"] = rd_sectors;
-    result["rd_ticks"] = rd_ticks;
-    result["wr_ios"] = wr_ios;
-    result["wr_merges"] = wr_merges;
-    result["wr_sectors"] = wr_sectors;
-    result["wr_ticks"] = wr_ticks;
-    result["nb_current"] = nb_current;
-    result["ticks"] = ticks;
-    result["aveq"] = aveq;
+    result["rd_ios"] = Json::Int64(rd_ios);
+    result["rd_merges"] = Json::Int64(rd_merges);
+    result["rd_sectors"] = Json::Int64(rd_sectors);
+    result["rd_ticks"] = Json::Int64(rd_ticks);
+    result["wr_ios"] = Json::Int64(wr_ios);
+    result["wr_merges"] = Json::Int64(wr_merges);
+    result["wr_sectors"] = Json::Int64(wr_sectors);
+    result["wr_ticks"] = Json::Int64(wr_ticks);
+    result["nb_current"] = Json::Int64(nb_current);
+    result["ticks"] = Json::Int64(ticks);
+    result["aveq"] = Json::Int64(aveq);
     return result;
 }

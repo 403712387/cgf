@@ -6,10 +6,9 @@ Json::Value MemoryStatistic::toJson()
     {
         return result;
     }
-    result["MemActive"] = MemActive;
-
-    result["RealInUse"] = RealInUse;
-    result["NotInUse"] = NotInUse;
+    result["MemActive"] = Json::Int64(MemActive);
+    result["RealInUse"] = Json::Int64(RealInUse);
+    result["NotInUse"] = Json::Int64(NotInUse);
     result["MemTotal"] = Json::Int64(MemTotal);
     result["MemFree"] = Json::Int64(MemFree);
     result["Buffers"] = Json::Int64(Buffers);
