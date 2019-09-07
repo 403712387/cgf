@@ -32,7 +32,7 @@ unix {
 LIBS += -L../../../../thirdparty/lib/linux64/curl -lcurl \
         -L../../../../thirdparty/lib/linux64/Qt -lQt5Core \
         -L../../../../thirdparty/lib/linux64/log4cplus -llog4cplus \
-        -L../../../../thirdparty/lib/linux64/gperftools/static -lprofiler -ltcmalloc \
+        #-L../../../../thirdparty/lib/linux64/gperftools/static -lprofiler -ltcmalloc \
         -L../../../../thirdparty/lib/linux64/jsoncpp -ljsoncpp
 }
 

@@ -28,7 +28,7 @@ LIBS += -L../../../bin/cgf/lib/module -lCommon -lCoreModule -lCommon \
 unix {
 LIBS += -L../../../bin/cgf/lib/module -lCommon -lCoreModule -lCommon \
         -L../../../../thirdparty/lib/linux64/Qt -lQt5Core \
-        -L../../../../thirdparty/lib/linux64/gperftools/static -lprofiler -ltcmalloc \
+        #-L../../../../thirdparty/lib/linux64/gperftools/static -lprofiler -ltcmalloc \
         -L../../../../thirdparty/lib/linux64/libmicrohttpd  -lmicrohttpd \
         -L../../../../thirdparty/lib/linux64/jsoncpp  -ljsoncpp
 }
