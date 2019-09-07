@@ -44,6 +44,7 @@ void HttpManager::beginWork()
 void HttpManager::uninit()
 {
     stopListen();
+    BaseProcess::uninit();
     LOG_I(mClassName, "uninit http manager, port:" << mHttpPort);
 }
 
@@ -105,6 +106,7 @@ bool HttpManager::stopListen()
     }
 
     MHD_stop_daemon(mHttpHandle);
+    mHttpHandle = NULL;
     LOG_I(mClassName, "stop http listen");
     return true;
 }
