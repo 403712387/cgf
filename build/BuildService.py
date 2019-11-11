@@ -3,6 +3,7 @@ import stat
 import shutil
 import time
 import sys
+from multiprocessing import cpu_count
 
 currentTime = time.localtime()
 strTime = "%d-%02d-%02d %02d:%02d:%02d" % (currentTime.tm_year, currentTime.tm_mon, currentTime.tm_mday, currentTime.tm_hour, currentTime.tm_min,currentTime.tm_sec)
@@ -135,7 +136,7 @@ def compileOneModule(modulePath, module):
     currentPath = os.getcwd()
     os.chdir(modulePath)
     os.system("make clean")
-    if os.system("make -j 16 ") != 0:
+    if os.system("make -j %d "%cpu_count()) != 0:
         os.chdir(currentPath)
         print("---------compile module " + module + ", please check code---------")
         return False

@@ -1,9 +1,10 @@
 #ifndef ERROR_H
 #define ERROR_H
 #include <string>
+#include "Base.h"
 
 // 记录错误信息的类
-class Error
+class CGF_EXPORT Error
 {
 public:
     Error(std::string reason, long long code = 0);

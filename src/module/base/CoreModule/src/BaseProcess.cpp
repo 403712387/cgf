@@ -200,6 +200,7 @@ void BaseProcess::messageBufferLoop()
         std::shared_ptr<BaseClass> baseClass = getMessageFromBuffer();
         if (baseClass.get() == NULL)
         {
+            onIdle();
             continue;
         }
 
@@ -268,4 +269,10 @@ bool BaseProcess::onForeseeMessage(std::shared_ptr<BaseMessage> &message)
 bool BaseProcess::onForeseeResponse(std::shared_ptr<BaseResponse> &response)
 {
     return false;
+}
+
+// 消息队列中没有消息的时候调用
+void BaseProcess::onIdle()
+{
+
 }

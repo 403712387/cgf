@@ -48,6 +48,9 @@ protected:
     // 预先处理回应
     virtual bool onForeseeResponse(std::shared_ptr<BaseResponse> &response);
 
+    // 消息队列中没有消息的时候调用
+    virtual void onIdle();
+
     // 订阅消息
     void subscribeMessage(MessageType messageType);
 

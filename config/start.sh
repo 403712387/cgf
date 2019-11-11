@@ -16,6 +16,6 @@ echo "core-%e-%p-%t" > /proc/sys/kernel/core_pattern
 
 #HEAPPROFILE=./cgf ./cfg
 #LD_PRELOAD=./lib/gperftools/libprofiler.so.5 CPUPROFILE=./cgf.prof ./cgf
-nohup ./cfg  > /dev/null 2>&1 &
+nohup ./cgf  > /dev/null 2>&1 &
 
 #pprof --svg ./cgf ./cgf.prof > cgf.svg
