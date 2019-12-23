@@ -71,7 +71,7 @@ def getGitInfo():
 #编译各个模块
 def compileModules():
     global serviceName
-	(projectPath, projectName) = os.path.split(projectFile)
+    (projectPath, projectName) = os.path.split(projectFile)
 
     compileSuccessful = True
 
