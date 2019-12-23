@@ -71,6 +71,7 @@ def getGitInfo():
 #编译各个模块
 def compileModules():
     global serviceName
+	(projectPath, projectName) = os.path.split(projectFile)
 
     compileSuccessful = True
 
@@ -93,7 +94,7 @@ def compileModules():
                 lineData = lineData.replace("\\", "")
                 lineData = lineData.strip()
                 (path, file) = os.path.split(lineData)
-                path = path.replace("./", "../src/")
+                path = os.path.join(projectPath, path)
                 if not compileOneModule(path, file):
                     raise Exception("compile  module fail")
 
