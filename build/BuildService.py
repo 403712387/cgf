@@ -146,7 +146,7 @@ def compileOneModule(modulePath, module):
 
 #拷贝第三方库
 def copyThirdpartyLibrarys():
-    global baseModuleName, businessModuleName, serviceName
+    global serviceName
 
     sourceDir = "../thirdparty/lib/linux64"
     destinationDir = "../src/bin/" + serviceName + "/lib"

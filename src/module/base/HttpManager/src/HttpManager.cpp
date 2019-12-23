@@ -65,6 +65,7 @@ std::shared_ptr<BaseResponse> HttpManager::onProcessMessage(std::shared_ptr<Base
     {
     case Config_Message:        // 配置信息
         response = onProcessConfigMessage(message);
+        break;
     }
 
     return response;
