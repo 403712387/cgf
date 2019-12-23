@@ -71,7 +71,6 @@ def getGitInfo():
 #编译各个模块
 def compileModules():
     global serviceName
-    (projectPath, projectName) = os.path.split(projectFile)
 
     compileSuccessful = True
 
@@ -82,6 +81,7 @@ def compileModules():
 
     try:
         projectFile = "../src/" + serviceName + ".pro"
+        (projectPath, projectName) = os.path.split(projectFile)
         if not os.path.exists(projectFile):
             print("not find project file %s"%projectFile)
             raise Exception("not find project file %s"%projectFile)
