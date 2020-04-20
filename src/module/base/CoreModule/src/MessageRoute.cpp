@@ -9,7 +9,7 @@
 // 模块注册
 void MessageRoute::registerProcess(BaseProcess *process)
 {
-    std::unique_lock<std::mutex> autolock(mAllProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mAllProcessLocker);
     for (auto &info : mAllProcess)
     {
         if (process == info)
@@ -23,7 +23,7 @@ void MessageRoute::registerProcess(BaseProcess *process)
 // 模块订阅消息
 void MessageRoute::subscribeMessage(BaseProcess *process, MessageType messageType)
 {
-    std::unique_lock<std::mutex> autolock(mSubscribeMessageProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mSubscribeMessageProcessLocker);
     auto iterAllProcess = mSubscribeMessageProcess.find(messageType);
     if (iterAllProcess == mSubscribeMessageProcess.end())
     {
@@ -47,7 +47,7 @@ void MessageRoute::subscribeMessage(BaseProcess *process, MessageType messageTyp
 // 预先处理消息（消息在订阅模块处理之前先处理，此函数是个hook函数,慎用！！！）
 void MessageRoute::foreseeMessage(BaseProcess *process, MessageType messageType)
 {
-    std::unique_lock<std::mutex> autolock(mForeseeMessageProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mForeseeMessageProcessLocker);
     auto iterAllProcess = mForeseeMessageProcess.find(messageType);
     if (iterAllProcess == mForeseeMessageProcess.end())
     {
@@ -71,7 +71,7 @@ void MessageRoute::foreseeMessage(BaseProcess *process, MessageType messageType)
 // 预先处理回应
 void MessageRoute::foreseeResponse(BaseProcess *process, MessageType messageType)
 {
-    std::unique_lock<std::mutex> autolock(mForeseeResponseProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mForeseeResponseProcessLocker);
     auto iterAllProcess = mForeseeResponseProcess.find(messageType);
     if (iterAllProcess == mForeseeResponseProcess.end())
     {
@@ -95,7 +95,7 @@ void MessageRoute::foreseeResponse(BaseProcess *process, MessageType messageType
 // 模块取消消息订阅
 void MessageRoute::unsubscribeMessage(BaseProcess *process, MessageType messageType)
 {
-    std::unique_lock<std::mutex> autolock(mSubscribeMessageProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mSubscribeMessageProcessLocker);
     auto iterAllProcess = mSubscribeMessageProcess.find(messageType);
     if (iterAllProcess == mSubscribeMessageProcess.end())
     {
@@ -118,7 +118,7 @@ void MessageRoute::unsubscribeMessage(BaseProcess *process, MessageType messageT
 // 取消预先处理消息
 void MessageRoute::unforeseeMessage(BaseProcess *process, MessageType messageType)
 {
-    std::unique_lock<std::mutex> autolock(mForeseeMessageProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mForeseeMessageProcessLocker);
     auto iterAllProcess = mForeseeMessageProcess.find(messageType);
     if (iterAllProcess == mForeseeMessageProcess.end())
     {
@@ -141,7 +141,7 @@ void MessageRoute::unforeseeMessage(BaseProcess *process, MessageType messageTyp
 // 取消预先处理回应
 void MessageRoute::unForeseeResponse(BaseProcess *process, MessageType messageType)
 {
-    std::unique_lock<std::mutex> autolock(mForeseeResponseProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mForeseeResponseProcessLocker);
     auto iterAllProcess = mForeseeResponseProcess.find(messageType);
     if (iterAllProcess == mForeseeResponseProcess.end())
     {
@@ -188,7 +188,7 @@ std::shared_ptr<BaseResponse> MessageRoute::sendMessage(std::shared_ptr<BaseMess
 std::shared_ptr<BaseResponse> MessageRoute::processSubscribeMessage(std::shared_ptr<BaseMessage> &message)
 {
     std::shared_ptr<BaseResponse> result;
-    //std::unique_lock<std::mutex> autolock(mSubscribeMessageProcessLocker);
+    //std::unique_lock<std::recursive_mutex> autolock(mSubscribeMessageProcessLocker);
     if (message->getTransType() == Sync_Trans_Message)  // 同步消息
     {
         if (message->getMessageDistribute() == Message_Unicast)   // 单播消息,发送给订阅了消息的模块
@@ -232,7 +232,7 @@ std::shared_ptr<BaseResponse> MessageRoute::processSubscribeMessage(std::shared_
 bool MessageRoute::processForeseeMessage(std::shared_ptr<BaseMessage> &message)
 {
     bool result = false;
-    std::unique_lock<std::mutex> autolock(mForeseeMessageProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mForeseeMessageProcessLocker);
 
     auto iterProcess = mForeseeMessageProcess.find(message->getMessageType());
     if (iterProcess == mForeseeMessageProcess.end())
@@ -256,7 +256,7 @@ bool MessageRoute::processForeseeMessage(std::shared_ptr<BaseMessage> &message)
 bool MessageRoute::processForeseeResponse(std::shared_ptr<BaseResponse> &response)
 {
     bool result = false;
-    std::unique_lock<std::mutex> autolock(mForeseeResponseProcessLocker);
+    std::unique_lock<std::recursive_mutex> autolock(mForeseeResponseProcessLocker);
 
     auto iterProcess = mForeseeResponseProcess.find(response->getMessage()->getMessageType());
     if (iterProcess == mForeseeResponseProcess.end())
@@ -466,22 +466,22 @@ void MessageRoute::exitService()
 {
     // 清除个个模块
     {
-        std::unique_lock<std::mutex> autoLocker(mSubscribeMessageProcessLocker);
+        std::unique_lock<std::recursive_mutex> autoLocker(mSubscribeMessageProcessLocker);
         mSubscribeMessageProcess.clear();
     }
 
     {
-        std::unique_lock<std::mutex> autoLocker(mForeseeMessageProcessLocker);
+        std::unique_lock<std::recursive_mutex> autoLocker(mForeseeMessageProcessLocker);
         mForeseeMessageProcess.clear();
     }
 
     {
-        std::unique_lock<std::mutex> autoLocker(mForeseeResponseProcessLocker);
+        std::unique_lock<std::recursive_mutex> autoLocker(mForeseeResponseProcessLocker);
         mForeseeResponseProcess.clear();
     }
 
     {
-        std::unique_lock<std::mutex> autoLocker(mAllProcessLocker);
+        std::unique_lock<std::recursive_mutex> autoLocker(mAllProcessLocker);
         for (BaseProcess * process : mAllProcess)
         {
             process->uninit();

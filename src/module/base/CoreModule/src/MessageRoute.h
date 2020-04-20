@@ -76,16 +76,16 @@ private:
 private:
     std::string                                 mClassName = "MessageRoute";
     std::vector<BaseProcess *>                  mAllProcess;       // 处理广播消息的模块
-    std::mutex                                  mAllProcessLocker;
+    std::recursive_mutex                                  mAllProcessLocker;
 
     std::map<MessageType, std::vector<BaseProcess*>>    mSubscribeMessageProcess;  // 处理多播消息的模块
-    std::mutex                                   mSubscribeMessageProcessLocker;
+    std::recursive_mutex                                   mSubscribeMessageProcessLocker;
 
     std::map<MessageType, std::vector<BaseProcess*>>    mForeseeMessageProcess;  // 事先处理消息的模块
-    std::mutex                                   mForeseeMessageProcessLocker;
+    std::recursive_mutex                                   mForeseeMessageProcessLocker;
 
     std::map<MessageType, std::vector<BaseProcess*>>    mForeseeResponseProcess;  // 事后处理消息的模块
-    std::mutex                                   mForeseeResponseProcessLocker;
+    std::recursive_mutex                                   mForeseeResponseProcessLocker;
 
     bool                                         mExit = false;
     bool                                         mReload = false;
